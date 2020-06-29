@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.saravana.restservices.spring.model.UserDetails;
+import com.saravana.restservices.spring.model.User;
 
 //RestController for Hello world
 @RestController
@@ -22,8 +22,8 @@ public class HelloController {
 	}
 	
 	@GetMapping("/userData")
-	public UserDetails getData() {
-		return new  UserDetails("Saravanan", "Thangasamy", 27);
+	public User getData() {
+		return new User(501L,"sarwaan007", "saravanan", "thangasamy", "saravana.thangasamy@gmail.com", "admin", "123adf");
 	}
 
 }
