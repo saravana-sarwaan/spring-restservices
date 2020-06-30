@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.saravana.restservices.spring.exception.UserExistsException;
 import com.saravana.restservices.spring.exception.UserNotFoundException;
+import com.saravana.restservices.spring.exception.UsernameNotFoundException;
 import com.saravana.restservices.spring.model.User;
 import com.saravana.restservices.spring.repository.UserRepository;
 
@@ -55,8 +56,11 @@ public class UserService {
 	}
 	
 	//To find user by their username
-	public User findByUsername(String username) {
-		return userRepository.findByUserName(username);
+	public User findByUsername(String username) throws UsernameNotFoundException {
+		if(userRepository.findByUserName(username) != null)
+			return userRepository.findByUserName(username);
+		else 
+			throw new UsernameNotFoundException(username + " not found");
 	}
 	
 }
