@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,6 +30,7 @@ import com.saravana.restservices.spring.service.UserService;
 
 @RestController
 @Validated
+@RequestMapping(path = "/users")
 public class UserController {
 	
 	@Autowired
@@ -52,7 +54,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(path = "/user/{id}")
+	@GetMapping(path = "/{id}")
 	public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id){
 		try {
 			return userService.findUser(id);
