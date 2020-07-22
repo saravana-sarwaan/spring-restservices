@@ -13,30 +13,51 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "user")
+//@JsonIgnoreProperties({"userName","firstName"}) // use jsonIgnoreProperties when you want to exclude multiple fields
+//@JsonFilter("userFilter") // use this for using jsonfilter -- refer jsonController
 public class User extends RepresentationModel<User>{
 
 	@Id
 	@GeneratedValue
+	@JsonView(View.External.class)
 	private Long id;
 
+	@JsonView(View.External.class)
 	@NotEmpty(message = "Username cannot be empty")
 	@Size(min = 2, max = 10, message = "Username should be min of 2 characters and max of 10 characters")
 	@Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
 	private String userName;
 
+	@JsonView(View.External.class)
 	@Column(name = "FIRST_NAME", length = 50, nullable = false)
 	private String firstName;
+	
+	@JsonView(View.External.class)
 	@Column(name = "LAST_NAME", length = 50, nullable = false)
 	private String lastName;
+	
+	@JsonView(View.External.class)
 	@Column(name = "EMAIL_ADDRESS", length = 50, nullable = false, unique = true)
 	private String email;
+	
+	@JsonView(View.Internal.class)
 	@Column(name = "ROLE", length = 50, nullable = false)
 	private String role;
+	
+	
+	//@JsonIgnore  // use json ignore to ignore selected fields
+	@JsonView(View.Internal.class)
 	@Column(name = "SSN", length = 50, nullable = false, unique = true)
 	private String ssn;
 
+	@JsonView(View.Internal.class)
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders;
 
