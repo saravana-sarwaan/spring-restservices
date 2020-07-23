@@ -31,7 +31,7 @@ public class HelloController {
 	
 	@GetMapping("/userData")
 	public User getData() {
-		return new User(501L,"sarwaan007", "saravanan", "thangasamy", "saravana.thangasamy@gmail.com", "admin", "123adf");
+		return new User(501L,"kentuckey","sarwaan007", "saravanan", "thangasamy", "saravana.thangasamy@gmail.com", "admin", "123adf",null);
 	}
 	
 	@GetMapping("/Hello-int")
